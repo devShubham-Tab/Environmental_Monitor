@@ -263,14 +263,14 @@ function updateAlerts(alerts) {
 
 function updateCharts(history) {
     // Update Temp/Hum Chart
-    tempHumChart.data.labels = history.timestamps;
-    tempHumChart.data.datasets[0].data = history.temperature;
-    tempHumChart.data.datasets[1].data = history.humidity;
+    tempHumChart.data.labels = [...history.timestamps];
+    tempHumChart.data.datasets[0].data = [...history.temperature];
+    tempHumChart.data.datasets[1].data = [...history.humidity];
     tempHumChart.update('none'); // Update without animation to prevent choppiness
 
     // Update AQI/pH Chart
-    aqiPhChart.data.labels = history.timestamps;
-    aqiPhChart.data.datasets[0].data = history.aqi;
-    aqiPhChart.data.datasets[1].data = history.ph;
+    aqiPhChart.data.labels = [...history.timestamps];
+    aqiPhChart.data.datasets[0].data = [...history.aqi];
+    aqiPhChart.data.datasets[1].data = [...history.ph];
     aqiPhChart.update('none');
 }
