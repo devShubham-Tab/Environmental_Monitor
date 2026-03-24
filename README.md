@@ -1,4 +1,4 @@
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8f421d9b-7f90-4c0f-ad64-7394c17228e5" /># Environmental_Monitor
+# Environmental_Monitor
 Live Link: https://environmental-monitor.onrender.com
 
 A rule-based environmental monitoring system built with Flask that tracks parameters like temperature, humidity, AQI, and pH, and triggers alerts when values exceed defined safety thresholds.
@@ -22,5 +22,5 @@ A rule-based environmental monitoring system built with Flask that tracks parame
 - Deployment: Render
 
 ## Screenshots
-(https://github.com/user-attachments/assets/b7899fce-8988-412c-8ea8-054ceec03e2b)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8f421d9b-7f90-4c0f-ad64-7394c17228e5" />
 
