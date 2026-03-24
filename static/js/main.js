@@ -4,6 +4,16 @@ let aqiPhChart = null;
 let currentLocation = 'Global';
 let fetchInterval = null;
 
+// Frontend history state for charts
+const MAX_HISTORY = 20;
+let historyData = {
+    timestamps: [],
+    temperature: [],
+    humidity: [],
+    aqi: [],
+    ph: []
+};
+
 // Initialization
 document.addEventListener("DOMContentLoaded", () => {
     initCharts();
@@ -48,7 +58,15 @@ function changeLocation(newLocation) {
 
     document.getElementById('page-title').textContent = `Fetching data for ${currentLocation}...`;
 
-    // Clear charts to avoid weird line connecting old location to new location
+    // Clear history to avoid weird line connecting old location to new location
+    historyData = {
+        timestamps: [],
+        temperature: [],
+        humidity: [],
+        aqi: [],
+        ph: []
+    };
+
     tempHumChart.data.labels = [];
     tempHumChart.data.datasets.forEach(ds => ds.data = []);
     tempHumChart.update();
@@ -177,7 +195,28 @@ async function fetchData() {
 
         updateCards(data.current, data.status);
         updateAlerts(data.alerts);
-        updateCharts(data.history);
+
+        // Update history data on the frontend
+        const now = new Date();
+        const timeString = now.getHours().toString().padStart(2, '0') + ':' +
+            now.getMinutes().toString().padStart(2, '0') + ':' +
+            now.getSeconds().toString().padStart(2, '0');
+
+        historyData.timestamps.push(timeString);
+        historyData.temperature.push(data.current.temperature);
+        historyData.humidity.push(data.current.humidity);
+        historyData.aqi.push(data.current.aqi);
+        historyData.ph.push(data.current.ph);
+
+        if (historyData.timestamps.length > MAX_HISTORY) {
+            historyData.timestamps.shift();
+            historyData.temperature.shift();
+            historyData.humidity.shift();
+            historyData.aqi.shift();
+            historyData.ph.shift();
+        }
+
+        updateCharts(historyData);
 
     } catch (error) {
         console.error("Error fetching data:", error);

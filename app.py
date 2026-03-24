@@ -6,21 +6,6 @@ import os
 
 app = Flask(__name__)
 
-# In-memory storage for historical data (for graphical analysis)
-MAX_HISTORY = 20
-histories = {}
-
-def get_history(location):
-    if location not in histories:
-        histories[location] = {
-            'timestamps': [],
-            'temperature': [],
-            'humidity': [],
-            'aqi': [],
-            'ph': []
-        }
-    return histories[location]
-
 @app.route('/')
 def dashboard():
     return render_template('index.html')
@@ -37,20 +22,6 @@ def get_data():
     
     # Evaluate thresholds
     statuses = rules.evaluate_all(current_data)
-    
-    # Update history for the ACTUALLY resolved location
-    history = get_history(actual_location)
-    now = datetime.datetime.now().strftime('%H:%M:%S')
-    history['timestamps'].append(now)
-    history['temperature'].append(current_data['temperature'])
-    history['humidity'].append(current_data['humidity'])
-    history['aqi'].append(current_data['aqi'])
-    history['ph'].append(current_data['ph'])
-    
-    # Keep only the last MAX_HISTORY entries
-    if len(history['timestamps']) > MAX_HISTORY:
-        for key in history:
-            history[key].pop(0)
             
     # Compile messages based on statuses
     alerts = []
@@ -78,7 +49,6 @@ def get_data():
         'is_random': is_random,
         'current': current_data,
         'status': statuses,
-        'history': history,
         'alerts': alerts
     }
     return jsonify(response)
