@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Environmental Monitoring System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=2">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <div class="header-title">
+                <h1 id="page-title">Environmental Monitoring - Global</h1>
+                <p>Live Real-Time Analysis & Alert System</p>
+            </div>
+            <div class="header-controls">
+                <div class="search-box">
+                    <input type="text" id="location-input" placeholder="Enter Location">
+                    <button id="search-btn">Go</button>
+                </div>
+                <div class="live-indicator">
+                    <span class="pulse-dot"></span>
+                    <span>Live Data</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="alerts-container" id="alerts-container">
+            <!-- Alerts will be injected here -->
+        </section>
+
+        <section class="grid-container">
+            <!-- Temperature Card -->
+            <div class="card" id="card-temperature">
+                <div class="card-header">
+                    <h2>Temperature</h2>
+                    <span class="status-badge" id="badge-temperature">Loading...</span>
+                </div>
+                <div class="card-body">
+                    <span class="value" id="val-temperature">--</span>
+                    <span class="unit">°C</span>
+                </div>
+            </div>
+
+            <!-- Humidity Card -->
+            <div class="card" id="card-humidity">
+                <div class="card-header">
+                    <h2>Humidity</h2>
+                    <span class="status-badge" id="badge-humidity">Loading...</span>
+                </div>
+                <div class="card-body">
+                    <span class="value" id="val-humidity">--</span>
+                    <span class="unit">%</span>
+                </div>
+            </div>
+
+            <!-- AQI Card -->
+            <div class="card" id="card-aqi">
+                <div class="card-header">
+                    <h2>Air Quality (AQI)</h2>
+                    <span class="status-badge" id="badge-aqi">Loading...</span>
+                </div>
+                <div class="card-body">
+                    <span class="value" id="val-aqi">--</span>
+                    <span class="unit">Index</span>
+                </div>
+            </div>
+
+            <!-- pH Card -->
+            <div class="card" id="card-ph">
+                <div class="card-header">
+                    <h2>Water pH Level</h2>
+                    <span class="status-badge" id="badge-ph">Loading...</span>
+                </div>
+                <div class="card-body">
+                    <span class="value" id="val-ph">--</span>
+                    <span class="unit">pH</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="charts-container">
+            <div class="chart-card">
+                <h3>Temperature & Humidity Trends</h3>
+                <div class="chart-wrapper">
+                    <canvas id="tempHumChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>AQI & pH Trends</h3>
+                <div class="chart-wrapper">
+                    <canvas id="aqiPhChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/main.js?v=2"></script>
+</body>
+
+</html>
